@@ -1,0 +1,27 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="ledger-sheet">
+    <div class="ledger-sheet__head">
+        <p class="ledger-sheet__eyebrow">New Account</p>
+        <h1>Open a ledger</h1>
+        <p class="ledger-sheet__sub">Create an account to start your manifest.</p>
+    </div>
+
+    <form action="{{ url_for('register') }}" method="POST" class="sign-form">
+        <div class="sign-field">
+            <label for="username">Username</label>
+            <input type="text" id="username" name="username" required autocomplete="username">
+        </div>
+
+        <div class="sign-field">
+            <label for="password">Password</label>
+            <input type="password" id="password" name="password" required new-password>
+        </div>
+
+        <button type="submit" class="btn btn--stamp btn--block">Sign Up</button>
+    </form>
+
+    <p class="ledger-sheet__foot">Already have an account? <a href="{{ url_for('login') }}">Log in here</a></p>
+</div>
+{% endblock %}
