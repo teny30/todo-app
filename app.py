@@ -3,6 +3,12 @@ from flask import Flask, render_template, request, redirect, url_for, session, f
 from flask_sqlalchemy import SQLAlchemy
 from werkzeug.security import generate_password_hash, check_password_hash
 from functools import wraps
+import logging
+# pyrefly: ignore [missing-import]
+from sqlalchemy.exc import OperationalError
+
+logging.basicConfig(level=logging.INFO)
+logger = logging.getLogger(__name__)
 
 app = Flask(__name__)
 app.secret_key = os.environ.get('SECRET_KEY', 'super-secret-key-for-session-management')
@@ -131,7 +137,13 @@ def delete_task(task_id):
 
 
 with app.app_context():
-    db.create_all()
+    try:
+        db.create_all()
+        logger.info("Database tables verified/created successfully.")
+    except OperationalError as e:
+        logger.error(f"Database connection failed. Ensure your DATABASE_URL is correct and the database server is running. Error: {e}")
+    except Exception as e:
+        logger.error(f"An unexpected error occurred during database initialization: {e}")
 
 if __name__ == "__main__":
     port = int(os.environ.get("PORT", 5000))
