@@ -1,8 +1,8 @@
-const CACHE_NAME = 'todo-app-cache-v1';
+const CACHE_NAME = 'todo-app-cache-v2';
 const urlsToCache = [
   '/',
   '/static/style.css',
-  '/static/manifest.json',
+  '/manifest.json',
   '/static/icon-192.png',
   '/static/icon-512.png',
   'https://fonts.googleapis.com/css2?family=Special+Elite&family=IBM+Plex+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap'
